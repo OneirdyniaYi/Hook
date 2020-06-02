@@ -196,12 +196,17 @@ namespace sylar{
 					i++;
 					continue;
 				}else{
+					if(!str.empty()){
+						vec.push_back(str,"",0);
+						str.clear();
+					} 
 					std::vector<size_t> ss;
 					size_t n = i+1;
 					while(isspace(m_pattern[n])){
 						n++;
 					}
-					if(m_pattern[n]=='{'){
+					str.append(1,m_pattern[n]);
+					if(m_pattern[n+1]=='{'){
 						fmt.append(1,'[');
 						ss.push_back(n++);
 						while(n<m_pattern.size()&&!ss.empty()){
@@ -218,13 +223,18 @@ namespace sylar{
 							}
 							n++;
 						}
-					}else{
-						str.append(1,m_pattern[n]);
+						if(!ss.empty()){
+							cout << "pattern prase error" << m_pattern << std::endl;
+							vec.push_back(std::make_tuple("<pattern_prase_error>",fmt,0));
+						}
 					}
-					vec.push_back(std::make_tuple(str,fmt,))>
+					vec.push_back(std::make_tuple(str,fmt,1));
+					fmt.clear();
+					str.clear();
+					i = n;
 				}
 			}else{
-				std::cout<<"The format of " << m_pattern << " error"<<" - "<<m_pattern.substr(i) << std::endl;
+				str.append(1,m_pattern[i]);
 			}
 		}
 
@@ -246,6 +256,13 @@ namespace sylar{
 		for(auto& i:vec){
 			if(std::get<2>(i)==0){
 				m_items.push_back(FormatItem::ptr(new StringFormatItem(std::get<0>(i))));
+			}else{
+				auto it = s_format_items.find(std::get<0>(i));
+				if(it == s_format_items.end()){
+					m_items.push_back(FormatItem::ptr(new StringFormatItem("<<pattern_prase_error:"+m_pattern+">>")));
+				}else{
+					m_item.push_back(it->second(std::get<1>(i)));
+				}
 			}
 		}
 
