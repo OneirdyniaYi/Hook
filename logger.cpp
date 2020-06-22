@@ -2,6 +2,7 @@
 #include <map>
 #include <functional>
 #include <memory>
+#include <iostream>
 
 
 namespace sylar{
@@ -116,7 +117,7 @@ namespace sylar{
 	class StringFormatItem : public LogFormatter::FormatItem
 	{
 	public:
-		StringFormatItem(const std::string& str):FormatItem(str),m_string(str){}
+		StringFormatItem(const std::string& str):m_string(str){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<m_string;
 		}
@@ -180,7 +181,7 @@ namespace sylar{
 	
 	void FileLogAppender::log(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event){
 		if(level >= m_level) {
-			m_filestream << m_formatter.format(logger,level,event);
+			m_filestream << m_formatter->format(logger,level,event);
 		}
 	}
 
@@ -281,7 +282,7 @@ namespace sylar{
 				if(it == s_format_items.end()){
 					m_items.push_back(FormatItem::ptr(new StringFormatItem("<<pattern_prase_error:"+m_pattern+">>")));
 				}else{
-					m_item.push_back(it->second(std::get<1>(i)));
+					m_items.push_back(it->second(std::get<1>(i)));
 				}
 			}
 		}
