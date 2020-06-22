@@ -80,7 +80,7 @@ public:
 
 	virtual void log(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
 	void setFormatter(std::shared_ptr<LogFormatter> val) { m_formatter = val;}
-	LogFormatter::ptr getFormatter() const {retrun m_formatter;}
+	LogFormatter::ptr getFormatter() const {return m_formatter;}
 protected:
 	LogLevel::Level m_level;
 	std::shared_ptr<LogFormatter> m_formatter;
