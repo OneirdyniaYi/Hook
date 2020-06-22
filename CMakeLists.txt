@@ -14,9 +14,9 @@ add_library(Hook_lib SHARED ${LIB_SRC})
 #add_library(Hook_static STATIC ${LIB_SRC})
 #SET_TARGET_PROPERTIES (Hook_static PROPERTIES OUTPUT_NAME "Hook_lib")
 
-add_executable(test tests/test.cc)
-add_dependencies(test Hook_lib)
-target_link_libraries(test Hook_lib)
+add_executable(testlog tests/test.cc)
+add_dependencies(testlog Hook_lib)
+target_link_libraries(testlog Hook_lib)
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJIECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJIECT_SOURCE_DIR}/lib)
