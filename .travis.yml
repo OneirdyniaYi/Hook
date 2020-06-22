@@ -13,6 +13,7 @@ addons:
       - cmake
 
 script:
+ - ls -ll
  - chmod a+x ..
  - mkdir build
  - cd build
