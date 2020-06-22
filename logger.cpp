@@ -40,7 +40,7 @@ namespace sylar{
 	{
 	public:
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
-			os<<LogLevel::getElapse();
+			os<<event->getElapse();
 		}
 		
 	};	
