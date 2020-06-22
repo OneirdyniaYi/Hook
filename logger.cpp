@@ -139,24 +139,24 @@ namespace sylar{
 		}
 	}
 
-	void Logger::debug(LogEvenet::ptr event){
-		debug(LogLevel::DEBUG,event);
+	void Logger::debug(LogEvent::ptr event){
+		log(LogLevel::DEBUG,event);
 	}
 
-	void Logger::info(LogEvenet::ptr event){
-		debug(LogLevel::INFO,event);
+	void Logger::info(LogEvent::ptr event){
+		log(LogLevel::INFO,event);
 	}
 
-	void Logger::warn(LogEvenet::ptr event){
-		debug(LogLevel::WARN,event);
+	void Logger::warn(LogEvent::ptr event){
+		log(LogLevel::WARN,event);
 	}
 
-	void Logger::error(LogEvenet::ptr event){
-		debug(LogLevel::ERROR,event);
+	void Logger::error(LogEvent::ptr event){
+		log(LogLevel::ERROR,event);
 	}
 
-	void Logger::fatal(LogEvenet::ptr event){
-		debug(LogLevel::FATAL,event);
+	void Logger::fatal(LogEvent::ptr event){
+		log(LogLevel::FATAL,event);
 	}l
 
 	FileLogAppender::FileLogAppender(const std::string& filename):m_filename(filename){}
@@ -241,9 +241,9 @@ namespace sylar{
 			}
 		}
 
-		static std::map<std::string,std::function<FormatItem::ptr(const std::string& str)>> s_format_items = {
+		static std::map<std::string,std::function<LogFormatter::FormatItem::ptr(const std::string& str)>> s_format_items = {
 #define XX(str,C) \
-			{#str,[](const std::string& fmt){return FormatItem::ptr(new C(fmt))};},
+			{#str,[](const std::string& fmt){return LogFormatter::FormatItem::ptr(new C(fmt))};},
 			XX(m,MessageFormatItem),   
 			XX(p,LevelFormatItem),
 			XX(r,ElapseFormatItem),

@@ -35,7 +35,7 @@ private:
 	uint32_t m_threadId = 0; 		//线程号id
 	uint32_t m_fiberId = 0;			//协程号id
 	uint64_t m_time = 0;
-	std:stringstream m_ss; 			//msg content
+	std::stringstream m_ss; 			//msg content
 
 
 
@@ -45,7 +45,7 @@ private:
 class LogLevel{
 public:
 	enum Level{
-			UNKNOW = 0;
+			UNKNOW = 0,
 			DEBUG = 1,
 			INFO = 2,
 			WARN = 3,
@@ -60,8 +60,8 @@ class Logger{
 	public:
 		typedef std::shared_ptr<Logger> ptr;
 
-		logger(const std::string& name = "root");
-		void log(LogLevel::Level level,LogEvenet::ptr event);
+		Logger(const std::string& name = "root");
+		void log(LogLevel::Level level,LogEvent::ptr event);
 		void debug(LogEvnet::ptr event);
 		void info(LogEvnet::ptr event);
 		void warn(LogEvnet::ptr event);
@@ -75,7 +75,7 @@ class Logger{
 		const std::string& getName() const {return m_name;}
 	private:
 		std::string m_name;				//日志名称
-		LogLevel::level m_leve; 		//日志级别
+		LogLevel::level m_level; 		//日志级别
 		LogFormatter::ptr m_formatter;
 		std::list<LogAppender::ptr> m_appenders;				//Appender集合
 };
@@ -108,7 +108,7 @@ public:
 		FormatItem(const std::string& fmt = "");
 		virtual ~FormatItem(){}
 		virtual void format(std::ofstream& os,std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
-	}
+	};
 	void init();
 private:
 	std::string m_pattern;
