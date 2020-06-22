@@ -12,8 +12,7 @@
 
 namespace sylar{
 
-class LogAppender;
-class LogFormatter;
+class Logger;
 
 //日志事件
 class LogEvent{
@@ -53,8 +52,43 @@ public:
 	static const char* ToString(LogLevel::Level level);
 };
 
+//日志格式
+class LogFormatter{
+public:
+	typedef std::shared_ptr<LogFormatter> ptr;
+	LogFormatter(const std::string& pattern);
+	//%t %thread_id %m%n
+	std::string format(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event);
+public:
+	class FormatItem{
+	public:
+		typedef std::shared_ptr<FormatItem> ptr;
+		virtual ~FormatItem(){}
+		virtual void format(std::ostream& os,std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
+	};
+	void init();
+private:
+	std::string m_pattern;
+	std::vector<FormatItem::ptr> m_items;
+};
+
+//日志输出地址
+class LogAppender{
+public: 
+	typedef std::shared_ptr<LogAppender> ptr;
+	virtual ~LogAppender() {}
+
+	virtual void log(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
+	void setFormatter(std::shared_ptr<LogFormatter> val) { m_formatter = val;}
+	LogFormatter::ptr getFormatter() const {retrun m_formatter;}
+protected:
+	LogLevel::Level m_level;
+	std::shared_ptr<LogFormatter> m_formatter;
+};
+
+
 //日志器
-class Logger{
+class Logger : public std::enable_shared_from_this<Logger>{
 	public:
 		typedef std::shared_ptr<Logger> ptr;
 
@@ -76,42 +110,6 @@ class Logger{
 		std::shared_ptr<LogFormatter> m_formatter;
 		std::list<std::shared_ptr<LogAppender>> m_appenders;				//Appender集合
 };
-
-//日志输出地址
-class LogAppender{
-public: 
-	typedef std::shared_ptr<LogAppender> ptr;
-	virtual ~LogAppender() {}
-
-	virtual void log(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
-	void setFormatter(std::shared_ptr<LogFormatter> val) { m_formatter = val;}
-	LogFormatter::ptr getFormatter() const {retrun m_formatter;}
-protected:
-	LogLevel::Level m_level;
-	std::shared_ptr<LogFormatter> m_formatter;
-};
-
-//日志格式
-class LogFormatter{
-public:
-	typedef std::shared_ptr<LogFormatter> ptr;
-	LogFormatter(const std::string& pattern);
-	//%t %thread_id %m%n
-	std::string format(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event);
-public:
-	class FormatItem{
-	public:
-		typedef std::shared_ptr<FormatItem> ptr;
-		FormatItem(const std::string& fmt = "");
-		virtual ~FormatItem(){}
-		virtual void format(std::ostream& os,std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
-	};
-	void init();
-private:
-	std::string m_pattern;
-	std::vector<FormatItem::ptr> m_items;
-};
-
 
 
 //输出到控制台的Appender

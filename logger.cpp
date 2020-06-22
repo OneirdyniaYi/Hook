@@ -25,6 +25,7 @@ namespace sylar{
 	}
 	class MessageFormatItem : public LogFormatter::FormatItem{
 	public:
+		MessageFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override{
 			os<<event->getContent();
 		}
@@ -33,6 +34,7 @@ namespace sylar{
 	class LevelFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		LevelFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<LogLevel::ToString(level);
 		}
@@ -41,6 +43,7 @@ namespace sylar{
 	class ElapseFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		ElapseFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getElapse();
 		}
@@ -49,6 +52,7 @@ namespace sylar{
 	class NameFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		NameFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<logger->getName();
 		}
@@ -57,6 +61,7 @@ namespace sylar{
 	class ThreadIdFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		ThreadIdFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getThreadId();
 		}
@@ -65,6 +70,7 @@ namespace sylar{
 	class FiberIdFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		FiberIdFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getFiberId();
 		}
@@ -83,6 +89,7 @@ namespace sylar{
 	class FilenameFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		FilenameFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getFile();
 		}
@@ -91,6 +98,7 @@ namespace sylar{
 	class LineFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		LineFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getLine();
 		}
@@ -99,6 +107,7 @@ namespace sylar{
 	class NewLineFormatItem : public LogFormatter::FormatItem
 	{
 	public:
+		NewLineFormatItem(const std::string& fmt = ""){}
 		void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<std::endl;
 		}
@@ -208,7 +217,7 @@ namespace sylar{
 					continue;
 				}else{
 					if(!str.empty()){
-						vec.push_back(str,"",0);
+						vec.push_back(std::make_tuple(str,"",0));
 						str.clear();
 					} 
 					std::vector<size_t> ss;
@@ -235,7 +244,7 @@ namespace sylar{
 							n++;
 						}
 						if(!ss.empty()){
-							cout << "pattern prase error" << m_pattern << std::endl;
+							std::cout << "pattern prase error" << m_pattern << std::endl;
 							vec.push_back(std::make_tuple("<pattern_prase_error>",fmt,0));
 						}
 					}
@@ -251,7 +260,7 @@ namespace sylar{
 
 		static std::map<std::string,std::function<LogFormatter::FormatItem::ptr(const std::string& str)>> s_format_items = {
 #define XX(str,C) \
-			{#str,[](const std::string& fmt){return LogFormatter::FormatItem::ptr(new C(fmt))};}
+			{#str,[](const std::string& fmt){return LogFormatter::FormatItem::ptr(new C(fmt));}}
 			XX(m,MessageFormatItem),   
 			XX(p,LevelFormatItem),
 			XX(r,ElapseFormatItem),
