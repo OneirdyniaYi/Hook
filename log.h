@@ -36,9 +36,6 @@ private:
 	uint32_t m_fiberId = 0;			//协程号id
 	uint64_t m_time = 0;
 	std::stringstream m_ss; 			//msg content
-
-
-
 };
 
 //日志级别
@@ -53,7 +50,7 @@ public:
 			FATAL = 5
 	};
 	static const char* ToString(LogLevel::Level level);
-}
+};
 //日志器
 
 class Logger{
@@ -62,12 +59,11 @@ class Logger{
 
 		Logger(const std::string& name = "root");
 		void log(LogLevel::Level level,LogEvent::ptr event);
-		void debug(LogEvnet::ptr event);
-		void info(LogEvnet::ptr event);
-		void warn(LogEvnet::ptr event);
-		void error(LogEvnet::ptr event);
-		void fatal(LogEvnet::ptr event);
-
+		void debug(LogEvent::ptr event);
+		void info(LogEvent::ptr event);
+		void warn(LogEvent::ptr event);
+		void error(LogEvent::ptr event);
+		void fatal(LogEvent::ptr event);
 		void addAppender(LogAppender::ptr appender);
 		void delAppender(LogAppender::ptr appender);
 		LogLevel::Level getLevel() const {return m_level;}
@@ -75,7 +71,7 @@ class Logger{
 		const std::string& getName() const {return m_name;}
 	private:
 		std::string m_name;				//日志名称
-		LogLevel::level m_level; 		//日志级别
+		LogLevel::Level m_level; 		//日志级别
 		LogFormatter::ptr m_formatter;
 		std::list<LogAppender::ptr> m_appenders;				//Appender集合
 };
@@ -107,7 +103,7 @@ public:
 		typedef std::shared_ptr<FormatItem> ptr;
 		FormatItem(const std::string& fmt = "");
 		virtual ~FormatItem(){}
-		virtual void format(std::ofstream& os,std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
+		virtual void format(std::ostream& os,std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event) = 0;
 	};
 	void init();
 private:
@@ -121,7 +117,7 @@ private:
 class StdoutLogAppender: public LogAppender{
 public:
 	typedef std::shared_ptr<StdoutLogAppender> ptr;
-	virtual void log(LogLevel::Level level,LogEvent::ptr event) override;
+	void log(LogLevel::Level level,LogEvent::ptr event) override;
 private:
 };
 
@@ -130,8 +126,8 @@ class FileLogAppender: public LogAppender{
 public:
 	typedef std::shared_ptr<StdoutLogAppender> ptr;
 	FileLogAppender(const std::string& filename);
-	virtual void log(LogLevel::Level level,LogEvent::ptr event) override;
-	void reopen();
+	void log(LogLevel::Level level,LogEvent::ptr event) override;
+	bool reopen();
 private:
 	std::string m_filename;
 	std::ofstream m_filestream;
