@@ -1,8 +1,6 @@
+dist: trusty
 language: cpp
-compiler:
-  - gcc
-os:
-  - linux
+sudo: required
 
 addons:
   apt:
