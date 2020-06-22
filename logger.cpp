@@ -81,7 +81,7 @@ namespace sylar{
 	class FilenameFormatItem : public LogFormatter::FormatItem
 	{
 	public:
-		void format(std::ostream& os,logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
+		void format(std::ofstream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override {
 			os<<event->getFile();
 		}
 		

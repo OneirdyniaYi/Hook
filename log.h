@@ -31,10 +31,10 @@ public:
 private:
 	const char* m_file = nullptr; 	//filename
 	int32_t m_line = 0; 			//line number
+	uint32_t m_elapse = 0;			//程序启动时间
 	uint32_t m_threadId = 0; 		//线程号id
 	uint32_t m_fiberId = 0;			//协程号id
 	uint64_t m_time = 0;
-	uint32_t m_elapse = 0;			//程序启动时间
 	std:stringstream m_ss; 			//msg content
 
 
@@ -76,6 +76,7 @@ class Logger{
 	private:
 		std::string m_name;				//日志名称
 		LogLevel::level m_leve; 		//日志级别
+		LogFormatter::ptr m_formatter;
 		std::list<LogAppender::ptr> m_appenders;				//Appender集合
 };
 
@@ -115,7 +116,6 @@ private:
 };
 
 
-}
 
 //输出到控制台的Appender
 class StdoutLogAppender: public LogAppender{
@@ -137,4 +137,5 @@ private:
 	std::ofstream m_filestream;
 };
 
+} 
 #endif
