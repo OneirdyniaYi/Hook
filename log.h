@@ -12,7 +12,8 @@
 
 namespace sylar{
 
-class Logger;
+class LogAppender;
+class LogFormatter;
 
 //日志事件
 class LogEvent{
@@ -26,7 +27,7 @@ public:
 	uint32_t getThreadId() const {return m_threadId;}
 	uint32_t getFiberId() const {return m_fiberId;}
 	uint32_t getTime() const {return m_time;}
-	std::string& getContent() const {return m_ss.str();}
+	std::string getContent() const {return m_ss.str();}
 	std::stringstream& getSS() {return m_ss;}
 private:
 	const char* m_file = nullptr; 	//filename
@@ -87,7 +88,7 @@ public:
 	LogFormatter::ptr getFormatter() const {retrun m_formatter;}
 protected:
 	LogLevel::Level m_level;
-	LogFormatter::ptr m_formatter;
+	std::shared_ptr<LogFormatter> m_formatter;
 };
 
 //日志格式
