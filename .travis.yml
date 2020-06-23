@@ -12,9 +12,9 @@ addons:
 
 script:
  - ls -ll
- - chmod a+x ../Hook
+ - chmod 777 log.h
+ - chmod 777 logger.cpp
  - ls -ll
- - su
  - mkdir build
  - ls -ll
  - cd build
