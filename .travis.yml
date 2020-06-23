@@ -15,6 +15,11 @@ script:
  - chmod a+x `pwd`
  - ls -ll
  - mkdir build
+ - ls -ll
  - cd build
- - cmake ..   
+ - ls -ll
+ - cmake ..
+ - ls -ll
  - make
+ - ls -ll
+ 
