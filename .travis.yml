@@ -12,7 +12,8 @@ addons:
 
 script:
  - ls -ll
- - chmod a+x ..
+ - chmod a+x `pwd`
+ - ls -ll
  - mkdir build
  - cd build
  - cmake ..   
