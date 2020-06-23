@@ -21,6 +21,8 @@ script:
  - ls -ll
  - cmake ..
  - ls -ll
- - make
+ - sudo make
  - ls -ll
+ - chmod 777 CMakeFiles/Hook_lib.dir/logger.cpp.o
+ - make
  
