@@ -1,7 +1,6 @@
-# Hook [![Build Status](https://travis-ci.com/OneirdyniaYi/Hook.svg?branch=master)](https://travis-ci.com/OneirdyniaYi/Hook)
-# sylar
+# Hook 
 
-## 日志系统
+## 日志系统 [![Build Status](https://travis-ci.com/OneirdyniaYi/Hook.svg?branch=master)](https://travis-ci.com/OneirdyniaYi/Hook)
 1)<br>
 	Log4J<br>
 <br>
