@@ -12,8 +12,9 @@ addons:
 
 script:
  - ls -ll
- - chmod a+x `pwd`
+ - chmod a+x ../Hook
  - ls -ll
+ - su
  - mkdir build
  - ls -ll
  - cd build
