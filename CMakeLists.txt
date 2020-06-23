@@ -7,7 +7,7 @@ set(CMAKE_C_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c11 -Wall -Wno-
 
 
 set(LIB_SRC
-    logger.cpp
+    hook/logger.cc
     )
 
 add_library(Hook_lib SHARED ${LIB_SRC})

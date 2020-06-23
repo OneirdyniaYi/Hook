@@ -10,6 +10,11 @@
 		|<br>
 	Appendor(日志输出地方)<br>
 
+## 配置系统
+
+1)<br>
+	Config ----> yaml
+
 ## 协程库封装
 
 ## socket函数库

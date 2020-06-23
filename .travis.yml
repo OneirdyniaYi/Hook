@@ -11,15 +11,8 @@ addons:
       - cmake
 
 script:
- - ls -ll
- - chmod 777 log.h
- - chmod 777 logger.cpp
- - ls -ll
  - mkdir build
- - ls -ll
  - cd build
- - ls -ll
  - cmake ..
- - ls -ll
  - sudo make
  
