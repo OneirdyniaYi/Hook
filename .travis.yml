@@ -22,7 +22,4 @@ script:
  - cmake ..
  - ls -ll
  - sudo make
- - ls -ll
- - chmod 777 CMakeFiles/Hook_lib.dir/logger.cpp.o
- - make
  
