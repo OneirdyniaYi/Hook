@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Hook/log.h"
+#include "../log.h"
 
 int main(int argc,char** ragv){
 	sylar::Logger::ptr logger(new sylar::Logger);
