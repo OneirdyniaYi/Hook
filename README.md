@@ -1,4 +1,4 @@
-# Hook
+# Hook [![Build Status](https://travis-ci.com/OneirdyniaYi/Hook.svg?branch=master)](https://travis-ci.com/OneirdyniaYi/Hook)
 # sylar
 
 ## 日志系统
