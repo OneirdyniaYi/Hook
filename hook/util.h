@@ -4,7 +4,7 @@
 #include <unistd.h>
 #ifdef __linux__
 	#include <sys/syscall.h>
-	#include <thread.h>
+	//#include <thread.h>
 #elif __WIN32__
 	//#include <windows.h>
 #endif
