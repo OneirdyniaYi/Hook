@@ -5,8 +5,8 @@ project(Hook)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -Wno-reorder")
-set(CMAKE_C_FLAGS "$ENV{CXXFLAGS} -O3 -fPIC -ggdb -std=c11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -Wno-reorder")
+set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -Wno-reorder")
+set(CMAKE_C_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -Wno-reorder")
 # linux  -rdynamic
 
 set(LIB_SRC
@@ -21,5 +21,5 @@ add_executable(testlog tests/test.cc)
 add_dependencies(testlog Hook_lib)
 target_link_libraries(testlog Hook_lib)
 
-SET(EXECUTABLE_OUTPUT_PATH ${PROJIECT_SOURCE_DIR}/bin)
-SET(LIBRARY_OUTPUT_PATH ${PROJIECT_SOURCE_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)

@@ -1,4 +1,0 @@
-E:/ZYQ/Hook/bin/CMakeFiles/Hook_lib.dir
-E:/ZYQ/Hook/bin/CMakeFiles/testlog.dir
-E:/ZYQ/Hook/bin/CMakeFiles/edit_cache.dir
-E:/ZYQ/Hook/bin/CMakeFiles/rebuild_cache.dir

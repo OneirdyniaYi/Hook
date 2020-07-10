@@ -11,9 +11,9 @@ addons:
       - cmake
 
 script:
- - mkdir build
  - cd build
  - rm -rf *
  - cmake ..
  - sudo make
+ - ../bin/testlog
  
