@@ -11,6 +11,9 @@ addons:
       - cmake
 
 script:
+ - mkdir build
+ - mkdir bin
+ - mkdir lib
  - cd build
  - rm -rf *
  - cmake ..
