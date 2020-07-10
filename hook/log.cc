@@ -230,7 +230,7 @@ namespace hook{
 	
 	void FileLogAppender::log(std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event){
 		if(level >= m_level) {
-			m_formatter->format(m_filename,logger,level,event);
+			m_formatter->format(m_filestream,logger,level,event);
 		}
 	}
 
