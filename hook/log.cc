@@ -30,7 +30,7 @@ namespace hook{
 
 	}
 
-	LogEventWrap::LogEventWrap(LogEventWrap::ptr e):m_event(e){
+	LogEventWrap::LogEventWrap(LogEvent::ptr e):m_event(e){
 
 	}
 	LogEventWrap::~LogEventWrap(){
@@ -156,7 +156,7 @@ namespace hook{
 	};
 
 	Logger::Logger(const std::string& name):m_name(name),m_level(LogLevel::DEBUG){
-		m_formatter.reset(new LogFormatter("%d [%p] %m %f"));
+		m_formatter.reset(new LogFormatter("%d [%p]%b%m%b%f"));
 	}
 
 	// void Logger::format(const char* fmt, ...){
@@ -251,7 +251,7 @@ namespace hook{
 		init();
 	}
 
-	std::ostream& format(std::ostream& ofs, std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event){
+	std::ostream& LogFormatter::format(std::ostream& ofs, std::shared_ptr<Logger> logger,LogLevel::Level level,LogEvent::ptr event){
 		for(auto& i : m_items){
 			i->format(ofs,logger,level,event);
 		}
