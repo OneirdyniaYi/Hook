@@ -1,0 +1,3 @@
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E rm -f CMakeFiles\testlog.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\testlog.dir/objects.a @CMakeFiles\testlog.dir\objects1.rsp
+C:\MinGW\bin\g++.exe  -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -Wno-reorder -Wl,--whole-archive CMakeFiles\testlog.dir/objects.a -Wl,--no-whole-archive -o \bin\testlog.exe -Wl,--out-implib,\bin\libtestlog.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\testlog.dir\linklibs.rsp

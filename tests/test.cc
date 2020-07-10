@@ -2,11 +2,11 @@
 #include "../hook/log.h"
 
 int main(int argc,char** ragv){
-	sylar::Logger::ptr logger(new sylar::Logger);
-	logger->addAppender(sylar::LogAppender::ptr(new sylar::StdoutLogAppender));
-	sylar::LogEvent::ptr event(new sylar::LogEvent(__FILE__,__LINE__,0,1,2,time(0)));
+	hook::Logger::ptr logger(new hook::Logger);
+	logger->addAppender(hook::LogAppender::ptr(new hook::StdoutLogAppender));
+	hook::LogEvent::ptr event(new hook::LogEvent(__FILE__,__LINE__,0,1,2,time(0)));
 
-	logger->log(sylar::LogLevel::DEBUG,event);
+	logger->log(hook::LogLevel::DEBUG,event);
 
 	
 

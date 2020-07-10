@@ -1,0 +1,3 @@
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Hook_lib.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\Hook_lib.dir/objects.a @CMakeFiles\Hook_lib.dir\objects1.rsp
+C:\MinGW\bin\g++.exe  -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations -shared -o \lib\libHook_lib.dll -Wl,--out-implib,\lib\libHook_lib.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\Hook_lib.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\Hook_lib.dir\linklibs.rsp
